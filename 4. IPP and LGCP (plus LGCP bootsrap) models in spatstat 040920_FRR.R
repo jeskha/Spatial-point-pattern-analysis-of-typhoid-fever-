@@ -163,6 +163,38 @@ ppm.typh.nomarks <- ppm(x_typh, ~ offset(log(census_im))+
 
 #-----------Model Diagnostics
 
+#- Diagnostics for marked IPP model
+#- Limited functions for looking at residuals for marked IPP model
+
+#- diagnostics for marked IPP model
+#- Q-Q plot not available for marked IPP model
+#- Extract raw residuals
+marked.resid <- residuals(ppm.typh.marks, type="raw")
+plot(marked.resid)
+#- one would need to zoom in to each of the plots to clearly see trend
+#- Key message: There were residuals very close to 1 in all the marked 
+# residual plots
+#- This means the marked IPP did not provide a good fit
+
+#This is also amplified when one extracts and plots the raw residuals 
+#- from the IPP model
+marked.res.val <- marked.resid$val
+plot(marked.res.val)
+plot(marked.res.val, xlab="distance (metres)",
+     ylab="Raw residual values",
+     main = "Raw residuals from the marked IPP model")
+
+#- There are 6 categories for the marks
+plot(residuals(ppm.typh.marks, type="raw")[1])
+plot(residuals(ppm.typh.marks, type="raw")[2])
+plot(residuals(ppm.typh.marks, type="raw")[3])
+plot(residuals(ppm.typh.marks, type="raw")[4])
+plot(residuals(ppm.typh.marks, type="raw")[5])
+plot(residuals(ppm.typh.marks, type="raw")[6])
+
+#----------------------------------------------------------------
+#- Diagnostics for unmarked IPP model
+
 #- Quantile-Quantile plot to check independence assumption
 qqplot.ppm(ppm.typh.nomarks, nsim=99)
 #independence assumption not met
