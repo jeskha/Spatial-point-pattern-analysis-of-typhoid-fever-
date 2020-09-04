@@ -162,6 +162,11 @@ ppm.typh.nomarks <- ppm(x_typh, ~ offset(log(census_im))+
                                             wash = wash.im))
 
 #-----------Model Diagnostics
+
+#- Quantile-Quantile plot to check independence assumption
+qqplot.ppm(ppm.typh.nomarks, nsim=99)
+#independence assumption not met
+
 #partial residuals
 #Effect of all variables was linear on log scale
 #Functional form of covariates
